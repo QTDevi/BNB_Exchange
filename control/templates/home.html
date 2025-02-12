@@ -1,0 +1,57 @@
+{% extends "header.html" %}
+{% block title %}
+    Homepage Panel
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center">Blockchain Explorer</h1>
+    <p class="text-center">Search for tokens and accounts</p>
+<br>
+<br>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="input-group">
+                <input type="text" id="token-input" class="form-control" placeholder="Search Token Address...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" onclick="search('token')">Search</button>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+<!--            <div class="input-group">-->
+<!--                <input type="text" id="transaction-input" class="form-control" placeholder="Search Transaction Hash...">-->
+<!--                <span class="input-group-btn">-->
+<!--                    <button class="btn btn-info" onclick="search('transaction')">Search</button>-->
+<!--                </span>-->
+<!--            </div>-->
+        </div>
+
+        <div class="col-md-4">
+            <div class="input-group">
+                <input type="text" id="user-input" class="form-control" placeholder="Search Account Address...">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" onclick="search('user')">Search</button>
+                </span>
+            </div>
+        </div>
+
+    </div>
+<br>
+<br>
+<br>
+
+    <script>
+        function search(type) {
+            var input = document.getElementById(type + "-input").value.trim();
+            if (input === "") {
+                alert("Please enter a valid " + type + " address/hash.");
+                return false;
+            }
+
+            // Redirect to Django backend for validation
+            window.location.href = "/search/" + type + "/?q=" + input;
+        }
+    </script>
+{% endblock %}

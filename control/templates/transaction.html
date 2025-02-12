@@ -1,0 +1,88 @@
+{% extends "header.html" %}
+
+{% block title %}
+    Transaction Details: {{ transaction.transaction_hash|truncatechars:12 }}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold mb-6">Transaction Details</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="col-span-2">
+                <span class="font-medium">Transaction Hash:</span>
+                <p class="break-all bg-gray-100 p-2 rounded mt-1">
+                    {{ transaction.transaction_hash }}
+                    <button class="ml-2 text-blue-500 hover:text-blue-700"
+                            onclick="copyToClipboard('{{ transaction.transaction_hash }}')">
+                        Copy
+                    </button>
+                </p>
+            </div>
+
+            <div>
+                <span class="font-medium">Block Number:</span>
+                <p class="mt-1">{{ transaction.block_number }}</p>
+            </div>
+
+            <div>
+                <span class="font-medium">Status:</span>
+                <p class="mt-1">
+                    <span class="px-2 py-1 rounded-full text-sm
+                        {% if transaction.status == 'Success' %}
+                            bg-green-100 text-green-800
+                        {% else %}
+                            bg-red-100 text-red-800
+                        {% endif %}">
+                        {{ transaction.status }}
+                    </span>
+                </p>
+            </div>
+
+            <div class="col-span-2">
+                <span class="font-medium">From:</span>
+                <p class="break-all bg-gray-100 p-2 rounded mt-1">{{ transaction.from }}</p>
+            </div>
+
+            <div class="col-span-2">
+                <span class="font-medium">To:</span>
+                <p class="break-all bg-gray-100 p-2 rounded mt-1">{{ transaction.to }}</p>
+            </div>
+
+            <div>
+                <span class="font-medium">Value:</span>
+                <p class="mt-1">{{ transaction.value }} BNB</p>
+            </div>
+
+            <div>
+                <span class="font-medium">Gas Price:</span>
+                <p class="mt-1">{{ transaction.gas_price }} Gwei</p>
+            </div>
+
+            <div>
+                <span class="font-medium">Gas Used:</span>
+                <p class="mt-1">{{ transaction.gas_used }}</p>
+            </div>
+
+            <div>
+                <span class="font-medium">Transaction Date:</span>
+                <p class="mt-1">{{ transaction.transaction_time }} UTC</p>
+            </div>
+
+            <div class="col-span-2">
+                <span class="font-medium">Block Hash:</span>
+                <p class="break-all bg-gray-100 p-2 rounded mt-1">{{ transaction.block_hash }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+        .then(() => alert('Copied to clipboard!'))
+        .catch(err => console.error('Failed to copy:', err));
+}
+</script>
+{% endblock %}

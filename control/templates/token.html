@@ -1,0 +1,103 @@
+{% extends "header.html" %}
+
+{% block title %}
+    Token: {{ address|truncatechars:12 }}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold mb-4">Token Address</h1>
+        <div class="bg-gray-100 p-3 rounded-md break-all mb-6">
+            {{ address }}
+            <button class="ml-2 text-blue-500 hover:text-blue-700" onclick="copyToClipboard('{{ address }}')">
+                Copy
+            </button>
+        </div>
+
+        <div class="price-section mb-6">
+            <h2 class="text-xl font-semibold mb-2">Price</h2>
+            <div class="flex items-center gap-4">
+                <p id="price" class="text-lg">{{ price|floatformat:8 }} WBNB</p>
+                <button onclick="refreshPrice()" class="refresh-btn">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Refresh
+                </button>
+            </div>
+        </div>
+
+        <h2 class="text-xl font-semibold mb-4">Reserves</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-medium mb-2">Token Reserve</h3>
+                <p id="token">{{ token|floatformat:0 }} Wei</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-medium mb-2">WBNB Reserve</h3>
+                <p id="wbnb">{{ wbnb|floatformat:0 }} Wei</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+        .then(() => alert('Address copied to clipboard!'))
+        .catch(err => console.error('Failed to copy:', err));
+}
+
+async function refreshPrice() {
+    try {
+        const response = await fetch(`/api/token/${address}/price`);
+        const data = await response.json();
+
+        if (data.success) {
+            document.getElementById('price').textContent = `${Number(data.price).toFixed(8)} WBNB`;
+            document.getElementById('token').textContent = `${Number(data.token).toFixed(0)} Wei`;
+            document.getElementById('wbnb').textContent = `${Number(data.wbnb).toFixed(0)} Wei`;
+        } else {
+            console.error('Price refresh failed:', data.error);
+            // Only show alert for user-facing errors
+            if (response.status === 404) {
+                alert('No liquidity pool found for this token.');
+            } else {
+                alert('Failed to refresh price. Please try again later.');
+            }
+        }
+    } catch (error) {
+        console.error('Error refreshing price:', error);
+        alert('Network error. Please check your connection and try again.');
+    }
+}
+
+const AUTO_REFRESH_INTERVAL = 15000; // 60 seconds
+setInterval(refreshPrice, AUTO_REFRESH_INTERVAL);
+</script>
+
+<style>
+.refresh-btn {
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.refresh-btn:hover {
+    background-color: #45a049;
+}
+
+.refresh-btn:active {
+    transform: scale(0.98);
+}
+</style>
+{% endblock %}

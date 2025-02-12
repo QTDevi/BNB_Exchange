@@ -1,0 +1,15 @@
+{% extends "header.html" %}
+
+{% block title %}
+    Error!
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron text-center">
+    <h1>Error {{ error_number }}</h1>
+    <p>{{ error_message }}</p>
+    <a href="{% url 'home' %}" class="btn btn-primary">Go to Home</a>
+</div>
+
+{% endblock %}

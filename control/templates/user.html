@@ -1,0 +1,61 @@
+{% extends "header.html" %}
+{% load custom_filters %}
+
+{% block title %}
+    Address Details: {{ address|truncatechars:12 }}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold mb-4">User Address</h1>
+        <div class="bg-gray-100 p-3 rounded-md break-all mb-4">
+            {{ address }}
+            <button class="ml-2 text-blue-500 hover:text-blue-700" onclick="copyToClipboard('{{ address }}')">
+                Copy
+            </button>
+        </div>
+
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">Balance</h2>
+            <p class="text-lg">{{ balance|floatformat:8 }} BNB</p>
+        </div>
+
+        <h2 class="text-xl font-semibold mb-4">Latest Transactions</h2>
+        <div class="space-y-4" id="transactions">
+            {% for tx in transactions %}
+                <div class="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div>
+                            <span class="font-medium">From:</span>
+                            <p class="break-all text-sm">{{ tx.from }}</p>
+                        </div>
+                        <div>
+                            <span class="font-medium">To:</span>
+                            <p class="break-all text-sm">{{ tx.to }}</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <span class="font-medium">Value:</span>
+                            <span>{{ tx.value|div:1000000000000000000|floatformat:8 }} BNB</span>
+                        </div>
+                    </div>
+                </div>
+            <br>
+            <hr>
+            {% empty %}
+                <p class="text-gray-500">No transactions found</p>
+            <br>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+        .then(() => alert('Address copied to clipboard!'))
+        .catch(err => console.error('Failed to copy:', err));
+}
+</script>
+{% endblock %}

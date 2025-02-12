@@ -1,0 +1,87 @@
+Unexpected error in search_view: Reverse for 'token' with keyword arguments '{'address': '0x250632378E573c6Be1AC2f97Fcdf00515d0Aa91B', 'hash_tx': None}' not found. 1 pattern(s) tried: ['token/(?P<address>0x[a-fA-F0-9]{40})/$']
+Internal Server Error: /search/token/
+Traceback (most recent call last):
+  File "D:\Projects\Crypto\Task_Project\control\views.py", line 44, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\Projects\Crypto\Task_Project\control\views.py", line 225, in search_view
+    return redirect(reverse(search_type, kwargs={
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+        "address": q if search_type in ["token", "user"] else None,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "hash_tx": q if search_type == "transaction" else None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    }))
+    ^^
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'token' with keyword arguments '{'address': '0x250632378E573c6Be1AC2f97Fcdf00515d0Aa91B', 'hash_tx': None}' not found. 1 pattern(s) tried: ['token/(?P<address>0x[a-fA-F0-9]{40})/$']
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Projects\Crypto\Task_Project\control\views.py", line 53, in wrapper
+    return redirect(reverse("error", kwargs={
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^
+        "error_number": 500,
+        ^^^^^^^^^^^^^^^^^^^^
+        "error_message": quote(str(e))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    }))
+    ^^
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'error' with keyword arguments '{'error_number': 500, 'error_message': 'Reverse%20for%20%27token%27%20with%20keyword%20arguments%20%27%7B%27address%27%3A%20%270x250632378E573c6Be1AC2f97Fcdf00515d0Aa91B%27%2C%20%27hash_tx%27%3A%20None%7D%27%20not%20found.%201%20pattern%28s%29%20tried%3A%20%5B%27token/%28%3FP%3Caddress%3E0x%5Ba-fA-F0-9%5D%7B40%7D%29/%24%27%5D'}' not found. 1 pattern(s) tried: ['error/(?P<error_number>[0-9]+)/(?P<error_message>[^/]+)/\\Z']
+Unexpected error in search_view: Reverse for 'token' with keyword arguments '{'address': '0x2170Ed0880ac9A755fd29B2688956BD959F933F8', 'hash_tx': None}' not found. 1 pattern(s) tried: ['token/(?P<address>0x[a-fA-F0-9]{40})/$']
+Internal Server Error: /search/token/
+Traceback (most recent call last):
+  File "D:\Projects\Crypto\Task_Project\control\views.py", line 44, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\Projects\Crypto\Task_Project\control\views.py", line 225, in search_view
+    return redirect(reverse(search_type, kwargs={
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+        "address": q if search_type in ["token", "user"] else None,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "hash_tx": q if search_type == "transaction" else None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    }))
+    ^^
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'token' with keyword arguments '{'address': '0x2170Ed0880ac9A755fd29B2688956BD959F933F8', 'hash_tx': None}' not found. 1 pattern(s) tried: ['token/(?P<address>0x[a-fA-F0-9]{40})/$']
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Projects\Crypto\Task_Project\control\views.py", line 53, in wrapper
+    return redirect(reverse("error", kwargs={
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^
+        "error_number": 500,
+        ^^^^^^^^^^^^^^^^^^^^
+        "error_message": quote(str(e))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    }))
+    ^^
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Crypto\Task_Project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'error' with keyword arguments '{'error_number': 500, 'error_message': 'Reverse%20for%20%27token%27%20with%20keyword%20arguments%20%27%7B%27address%27%3A%20%270x2170Ed0880ac9A755fd29B2688956BD959F933F8%27%2C%20%27hash_tx%27%3A%20None%7D%27%20not%20found.%201%20pattern%28s%29%20tried%3A%20%5B%27token/%28%3FP%3Caddress%3E0x%5Ba-fA-F0-9%5D%7B40%7D%29/%24%27%5D'}' not found. 1 pattern(s) tried: ['error/(?P<error_number>[0-9]+)/(?P<error_message>[^/]+)/\\Z']
+Unexpected error in view_user: Invalid filter: 'div'
